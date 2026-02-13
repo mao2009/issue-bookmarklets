@@ -20,10 +20,20 @@
 javascript:(function(){function getRedmineIssueTitle(){const re=/#.*?$/;const ticket=re.exec(document.querySelector("#content h2").textContent);const el=document.querySelector(".subject h3");return ticket+"_"+el.textContent.replace(/\s+/g,"_").replace(/\//g,".");}try{const title=getRedmineIssueTitle();const ta=document.createElement("textarea");ta.value=title;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();alert("Copied for branch name: "+title);}catch(e){alert("Error: "+e.message);} })();
 ```
 
+---
+
+## GitHub 用
+
+Issue 番号とタイトルを取得し、`#123_タイトル` の形式でコピーします。
+
+```javascript
+javascript:(function(){function getGithubIssueTitle(){const ticket=document.querySelector(".HeaderViewer-module__issueNumberLink__FiaRk").textContent;const el=document.querySelector(".markdown-title");return ticket+"_"+el.textContent.trim().replace(/\s+/g,"_").replace(/\//g,".");}try{const title=getGithubIssueTitle();const ta=document.createElement("textarea");ta.value=title;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();alert("Copied for branch name: "+title);}catch(e){alert("Error: "+e.message);} })();
+```
+
 ### 例
-- **チケット番号**: 1234
-- **タイトル**: チケットサンプル
-- **取得（コピー）内容**: `#1234_チケットサンプル`
+- **Issue/チケット番号**: 1234
+- **タイトル**: サンプルタイトル
+- **取得（コピー）内容**: `#1234_サンプルタイトル`
 
 ---
 
